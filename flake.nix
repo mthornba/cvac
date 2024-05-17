@@ -27,11 +27,11 @@
               OSFONTDIR=${pkgs.roboto}/share/fonts \
               latexmk -interaction=nonstopmode -pdf -lualatex \
               -pretex="\pdfvariable suppressoptionalinfo 512\relax" \
-              document.tex
+              resume.tex
           '';
           installPhase = ''
             mkdir -p $out
-            cp document.pdf $out/
+            cp resume.pdf $out/
           '';
         };
       };
