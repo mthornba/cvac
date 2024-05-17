@@ -1,5 +1,5 @@
 {
-  description = "LaTeX Document Demo";
+  description = "LaTeX C.V. / Resume";
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs/nixos-23.11;
     flake-utils.url = github:numtide/flake-utils;
@@ -14,24 +14,38 @@
       };
     in rec {
       packages = {
-        document = pkgs.stdenvNoCC.mkDerivation rec {
-          name = "latex-demo-document";
+        resume = pkgs.stdenvNoCC.mkDerivation rec {
+          name = "latex-resume";
           src = self;
-          buildInputs = [ pkgs.coreutils pkgs.roboto tex ];
+          propagatedBuildInputs = [ pkgs.coreutils pkgs.roboto tex ];
           phases = ["unpackPhase" "buildPhase" "installPhase"];
-          buildPhase = ''
-            export PATH="${pkgs.lib.makeBinPath buildInputs}";
-            mkdir -p .cache/texmf-var
-            env TEXMFHOME=.cache TEXMFVAR=.cache/texmf-var \
-              SOURCE_DATE_EPOCH=${toString self.lastModified} \
+          SCRIPT = ''
+            #!/usr/bin/env bash
+            prefix=${builtins.placeholder "out"}
+            export PATH="${pkgs.lib.makeBinPath propagatedBuildInputs}";
+            DIR=$(mktemp -d)
+            RES=$(pwd)/resume.pdf
+            cd $prefix/share
+            mkdir -p "$DIR/.texcache/texmf-var"
+            env TEXMFHOME="$DIR/.cache" \
+              TEXMFVAR="$DIR/.cache/texmf-var" \
               OSFONTDIR=${pkgs.roboto}/share/fonts \
+              SOURCE_DATE_EPOCH=${toString self.lastModified} \
               latexmk -interaction=nonstopmode -pdf -lualatex \
+              -output-directory="$DIR" \
               -pretex="\pdfvariable suppressoptionalinfo 512\relax" \
-              resume.tex
+              -usepretex resume.tex
+            mv "$DIR/resume.pdf" $RES
+            rm -rf "$DIR"
+          '';
+          buildPhase = ''
+            printenv SCRIPT >latex-resume
           '';
           installPhase = ''
-            mkdir -p $out
-            cp resume.pdf $out/
+            mkdir -p $out/{bin,share}
+            cp resume.tex $out/share/resume.tex
+            cp latex-resume $out/bin/latex-resume
+            chmod u+x $out/bin/latex-resume
           '';
         };
       };
@@ -41,6 +55,6 @@
           roboto
         ];
       };
-      defaultPackage = packages.document;
+      defaultPackage = packages.resume;
     });
 }
