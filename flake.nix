@@ -9,7 +9,7 @@
     let
       pkgs = nixpkgs.legacyPackages.${system};
       tex = pkgs.texlive.combine {
-        inherit (pkgs.texlive) scheme-basic latex-bin latexmk
+        inherit (pkgs.texlive) scheme-full latex-bin latexmk
         fontspec;
       };
     in rec {
@@ -53,6 +53,7 @@
         name = "cvac";
         packages = with pkgs; [
           roboto
+          texliveFull
         ];
       };
       defaultPackage = packages.resume;
