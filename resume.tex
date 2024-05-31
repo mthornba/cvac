@@ -1,49 +1,47 @@
-\documentclass[letterpaper]{article}
+\documentclass{resume}
+\usepackage[sfdefault,condensed]{roboto} % Use the Roboto font as the default sans-serif font
+\renewcommand*\familydefault{\sfdefault} % Set the default font family to sans-serif
 
-\usepackage{fontspec}
-\usepackage{hyperref}
-\setmonofont{Roboto}
-\renewcommand*\familydefault{\ttdefault}
+%%%
+% Personal Info
+%%%
+\name{John Doe}
+\address{123 Main St.}
+\address{City, State ZIP}
+\email{john.doe@example.com}
+\phone{(123) 456-7890}
 
 \begin{document}
 
-\section*{Personal Information}
-Name: John Doe \\
-Email: john.doe@example.com \\
-Phone: 123-456-7890 \\
-Address: 123 Street, City, Province, A1B 2C3 \\
-LinkedIn: \url{https://www.linkedin.com/in/johndoe} \\
-GitHub: \url{https://github.com/johndoe}
+%%%
+% About
+%%%
+\begin{rSection}{About Me}
+  Description of education, achievements, etc.
+\end{rSection}
 
-\section*{About}
-A highly motivated and experienced professional, specialized in...
+%%%
+% Experience
+%%%
+\begin{rSection}{Experience}
 
-\section*{Education}
-\begin{itemize}
-\item University of Anytown, Bachelor of Science in Computer Science, 2015-2019
-\end{itemize}
+\begin{rSubsection}{Company Name}{Date Range}{Job Title}{Location}
+  \item Description of responsibilities and achievements.
+\end{rSubsection}
 
-\section*{Work Experience}
-\begin{itemize}
-\item Tech Corp, Software Engineer, 2019-2022
-  \begin{itemize}
-  \item Developed and maintained web applications
-  \item Collaborated with cross-functional teams
-  \item Wrote and reviewed code
-  \end{itemize}
-\end{itemize}
+\begin{rSubsection}{Job Title}{Date Range}{Company Name}{Location}
+  \item Description of responsibilities and achievements.
+\end{rSubsection}
 
-\section*{Skills}
-\begin{itemize}
-\item JavaScript
-\item Python
-\item React
-\item Node.js
-\end{itemize}
+\end{rSection}
 
-\section*{Certifications}
-\begin{itemize}
-\item AWS Certified Solutions Architect, 2021
-\end{itemize}
+%%%
+% Education
+%%%
+\begin{rSection}{Education}
+  \begin{rSubsection}{University Name}{Date Range}{Degree}{Location}
+    \item Description of education, achievements, etc.
+  \end{rSubsection}
+\end{rSection}
 
 \end{document}
