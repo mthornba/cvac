@@ -29,50 +29,29 @@
 %%%
 \newcommand{\name}[1]{\renewcommand{\name}{#1}}
 \newcommand{\email}[1]{\renewcommand{\email}{#1}}
+\newcommand{\linkedin}[1]{\renewcommand{\linkedin}{#1}}
 \newcommand{\phone}[1]{\renewcommand{\phone}{#1}}
-\newcommand{\addressSep}{\\}
+\newcommand{\location}[1]{\renewcommand{\location}{#1}}
+\newcommand{\separator}{\\}
 
 \newcommand{\lightgrey}[1]{{\color{black!40}#1}}
 \newcommand{\grey}[1]{{\color{black!80}#1}}
-\let \@addressone \relax
-\let \@addresstwo \relax
-\let \@addressthree \relax
 
-\newcommand{\address}[1]{
-  \@ifundefined{@addressone}{
-    \def \@addressone {#1}
-  }{
-    \@ifundefined{@addresstwo}{
-      \def \@addresstwo {#1}
-    }{
-      \def \@addressthree {#1}
-    }
-  }
-}
-
-\newcommand{\printaddress}[1]{
-\begingroup
-\def \\ {\addressSep}
-\raggedleft{#1}
-\endgroup
-\par
-\smallskip
-}
-
-\newcommand{\printnameandaddress}{
+\newcommand{\printpersonal}{
   \begingroup
   \noindent
   \begin{tabularx}{\textwidth}{@{}Xr@{}}
     {\Huge\name} &
     \lightgrey{
       \begin{tabular}[b]{r}
-        \@ifundefined{@addressone}{}{\@addressone\addressSep}
-        \@ifundefined{@addresstwo}{}{\@addresstwo\addressSep}
-        \@ifundefined{@addressthree}{}{\@addressthree}
+        \location\separator
+        \phone
       \end{tabular}
-      \begin{tabular}[b]{r@{}}
-        \phone \\ \email
-      \end{tabular}}
+      \begin{tabular}[b]{r}
+        \email\separator
+        \linkedin
+      \end{tabular}
+    }
   \end{tabularx}
   \smallskip\par
   \endgroup
@@ -82,7 +61,7 @@
 % Print personal info at beginning of document
 %%%
 \AtBeginDocument{
-  \printnameandaddress
+  \printpersonal
   \hrule
 }
 
