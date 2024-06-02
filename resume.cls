@@ -11,6 +11,7 @@
 \usepackage{array}
 \usepackage{ifthen}
 \usepackage{tabularx}
+\usepackage{xcolor}
 
 %%%
 % Set margins
@@ -23,11 +24,16 @@
   right=0.75in,
 }
 
+%%%
+% Define data inputs and styles
+%%%
 \newcommand{\name}[1]{\renewcommand{\name}{#1}}
 \newcommand{\email}[1]{\renewcommand{\email}{#1}}
 \newcommand{\phone}[1]{\renewcommand{\phone}{#1}}
 \newcommand{\addressSep}{\\}
 
+\newcommand{\lightgrey}[1]{{\color{black!40}#1}}
+\newcommand{\grey}[1]{{\color{black!80}#1}}
 \let \@addressone \relax
 \let \@addresstwo \relax
 \let \@addressthree \relax
@@ -58,6 +64,7 @@
     \noindent
     \begin{tabularx}{\textwidth}{@{}Xr@{}}
       {\huge\bfseries\name} &
+    \lightgrey{
       \begin{tabular}[b]{r}
         \@ifundefined{@addressone}{}{\@addressone\addressSep}
         \@ifundefined{@addresstwo}{}{\@addresstwo\addressSep}
@@ -65,7 +72,7 @@
       \end{tabular}
       \begin{tabular}[b]{r@{}}
         \phone \\ \email
-      \end{tabular}
+      \end{tabular}}
     \end{tabularx}
     \smallskip\par
   \endgroup
