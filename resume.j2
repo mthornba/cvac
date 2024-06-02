@@ -24,8 +24,9 @@
 % Skills
 %%%
 \begin{rSection}{Skills}
-  {% for skill in skills %}
-  {% endfor %}
+  \skillsList{ {%- for skill in skills -%}
+  {{ skill }},
+  {%- endfor -%} }
 \end{rSection}
 
 %%%
