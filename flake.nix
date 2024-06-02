@@ -17,7 +17,7 @@
         resume = pkgs.stdenvNoCC.mkDerivation rec {
           name = "latex-resume";
           src = self;
-          propagatedBuildInputs = [ pkgs.coreutils pkgs.roboto tex ];
+          propagatedBuildInputs = [ pkgs.coreutils pkgs.roboto tex pkgs.python3];
           phases = ["unpackPhase" "buildPhase" "installPhase"];
           SCRIPT = ''
             #!/usr/bin/env bash
@@ -53,6 +53,7 @@
       devShells.default = pkgs.mkShell {
         name = "cvac";
         packages = with pkgs; [
+          python3
           roboto
           texliveFull
         ];
