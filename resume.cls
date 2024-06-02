@@ -90,7 +90,7 @@
     \textit{#3} \hfill \textit{#4}
   }
   \smallskip
-  \begin{list}{$\cdot$}{\leftmargin=0em}
+  \begin{list}{$\bullet$}{\leftmargin=1em}
     \setlength{\itemsep}{-0.5em} \vspace{-0.5em}
     }{
   \end{list}
