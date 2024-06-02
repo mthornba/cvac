@@ -44,6 +44,7 @@
           installPhase = ''
             mkdir -p $out/{bin,share}
             cp resume.tex $out/share/resume.tex
+            cp resume.cls $out/share/resume.cls
             cp latex-resume $out/bin/latex-resume
             chmod u+x $out/bin/latex-resume
           '';
