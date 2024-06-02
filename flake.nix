@@ -17,7 +17,7 @@
         resume = pkgs.stdenvNoCC.mkDerivation rec {
           name = "latex-resume";
           src = self;
-          propagatedBuildInputs = [ pkgs.coreutils pkgs.roboto tex pkgs.python3];
+          propagatedBuildInputs = [ pkgs.coreutils pkgs.roboto tex pkgs.python3Packages.pyyaml pkgs.python3Packages.jinja2 ];
           phases = ["unpackPhase" "buildPhase" "installPhase"];
           SCRIPT = ''
             #!/usr/bin/env bash
@@ -56,6 +56,8 @@
           python3
           roboto
           texliveFull
+          python3Packages.pyyaml
+          python3Packages.jinja2
         ];
       };
       defaultPackage = packages.resume;

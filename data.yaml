@@ -1,0 +1,38 @@
+personal_info:
+  name: John Doe
+  location: City, Province
+  email: john.doe@example.com
+  phone: '123.456.7890'
+  linkedin: linkedin.com/in/johndoe
+  github: github.com/johndoe
+  intro: |
+    Description of education, achievements, etc.
+
+education:
+- institution: University of Anytown
+  degree: BASc, Computer Science
+  start_date: 'SEP 2015'
+  end_date: 'APR 2019'
+  location: Anytown
+  notes: Dean's List
+
+work_experience:
+- company: Tech Corp
+  position: Software Engineer
+  start_date: 'JUL 2019'
+  end_date: 'DEC 2022'
+  location: Anytown
+  details:
+  - Developed and maintained web applications
+  - Collaborated with cross-functional teams
+  - Wrote and reviewed code
+
+skills:
+- JavaScript
+- Python
+- React
+- Node.js
+
+certifications:
+- name: AWS Certified Solutions Architect
+  date: '2021-01-01'
