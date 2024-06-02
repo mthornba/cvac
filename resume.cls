@@ -1,4 +1,4 @@
-\ProvidesClass{resume}[2022/12/17 v3.0 Resume class]
+\ProvidesClass{resume}[2024/06/02 v1.0 My custom resume class]
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 \LoadClass{article}
