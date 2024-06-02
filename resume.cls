@@ -69,8 +69,14 @@
 % Sections, e.g. Experience, Education, etc.
 %%%
 \newenvironment{rSection}[1]{
-  \medskip
-  \MakeUppercase{\textbf{#1}}
+  \ifx\relax#1\relax
+    \let\titletext\relax
+  \else
+    \def\titletext{\MakeUppercase{\textbf{#1}}}
+    \medskip
+  \fi
+  \noindent
+  \titletext
   \smallskip
   \begin{list}{}{
       \setlength{\leftmargin}{1.5em}
