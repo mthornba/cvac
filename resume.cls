@@ -63,7 +63,7 @@
   \begingroup
   \noindent
   \begin{tabularx}{\textwidth}{@{}Xr@{}}
-    {\huge\bfseries\name} &
+    {\Huge\name} &
     \lightgrey{
       \begin{tabular}[b]{r}
         \@ifundefined{@addressone}{}{\@addressone\addressSep}
