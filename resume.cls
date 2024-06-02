@@ -51,19 +51,19 @@
 }
 
 \newcommand{\printaddress}[1]{
-  \begingroup
-    \def \\ {\addressSep}
-    \raggedleft{#1}
-  \endgroup
-  \par
-  \smallskip
+\begingroup
+\def \\ {\addressSep}
+\raggedleft{#1}
+\endgroup
+\par
+\smallskip
 }
 
 \newcommand{\printnameandaddress}{
   \begingroup
-    \noindent
-    \begin{tabularx}{\textwidth}{@{}Xr@{}}
-      {\huge\bfseries\name} &
+  \noindent
+  \begin{tabularx}{\textwidth}{@{}Xr@{}}
+    {\huge\bfseries\name} &
     \lightgrey{
       \begin{tabular}[b]{r}
         \@ifundefined{@addressone}{}{\@addressone\addressSep}
@@ -73,8 +73,8 @@
       \begin{tabular}[b]{r@{}}
         \phone \\ \email
       \end{tabular}}
-    \end{tabularx}
-    \smallskip\par
+  \end{tabularx}
+  \smallskip\par
   \endgroup
 }
 
@@ -94,10 +94,10 @@
   \MakeUppercase{\textbf{#1}}
   \smallskip
   \begin{list}{}{
-    \setlength{\leftmargin}{1.5em}
-  }
-  \item[]
-}{
+      \setlength{\leftmargin}{1.5em}
+    }
+    \item[]
+      }{
   \end{list}
 }
 
@@ -113,7 +113,7 @@
   \smallskip
   \begin{list}{$\cdot$}{\leftmargin=0em}
     \setlength{\itemsep}{-0.5em} \vspace{-0.5em}
-}{
+    }{
   \end{list}
   \vspace{0.5em}
 }
