@@ -20,10 +20,10 @@
 %%%
 \usepackage{geometry}
 \geometry{
-  top=0.6in,
-  bottom=0.6in,
-  left=0.75in,
-  right=0.75in,
+  top=0.5in,
+  bottom=0.5in,
+  left=0.6in,
+  right=0.6in,
 }
 
 %%%
