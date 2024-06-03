@@ -14,26 +14,6 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 
-% refactor skills section
-\RequirePackage{xparse}
-\RequirePackage{expl3}
-\RequirePackage{amsmath}
-
-\ExplSyntaxOn
-% Command to print a list of items separated by \cdot
-\NewDocumentCommand{\printseparatedlist}{m}
-  {
-    \seq_set_split:Nnn \l_tmpa_seq { , } { #1 }
-    \seq_use:Nn \l_tmpa_seq { \ $\cdot$\ }
-  }
-\ExplSyntaxOff
-
-% Command to accept variable inputs
-\NewDocumentCommand{\skillsList}{m}
-  {
-    \printseparatedlist{#1}
-  }
-
 %%%
 % Set margins
 %%%
