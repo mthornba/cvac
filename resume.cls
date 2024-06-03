@@ -13,6 +13,7 @@
 \usepackage{tabularx}
 \usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage{fontawesome5}
 
 %%%
 % Set margins
@@ -29,11 +30,11 @@
 % Define data inputs and styles
 %%%
 \newcommand{\name}[1]{\renewcommand{\name}{#1}}
-\newcommand{\email}[1]{\renewcommand{\email}{#1}}
-\newcommand{\linkedin}[1]{\renewcommand{\linkedin}{#1}}
-\newcommand{\github}[1]{\renewcommand{\github}{#1}}
-\newcommand{\phone}[1]{\renewcommand{\phone}{#1}}
-\newcommand{\location}[1]{\renewcommand{\location}{#1}}
+\newcommand{\email}[1]{\renewcommand{\email}{#1 {\faIcon{envelope-square}}}}
+\newcommand{\linkedin}[1]{\renewcommand{\linkedin}{#1 {\faIcon{linkedin}}}}
+\newcommand{\github}[1]{\renewcommand{\github}{#1 {\faIcon{github-square}}}}
+\newcommand{\phone}[1]{\renewcommand{\phone}{#1 {\faIcon{phone-square}}}}
+\newcommand{\location}[1]{\renewcommand{\location}{#1 {\faIcon{map-marker-alt}}}}
 \newcommand{\separator}{\\}
 \newcommand{\skillSeparator}{\cdot}
 
@@ -64,7 +65,7 @@
         \formaturl{\linkedin}
       \end{tabular}
       \begin{tabular}[b]{r}
-        \phone\separator
+        \location\ \ \phone\separator
         \email
       \end{tabular}
     }

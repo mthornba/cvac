@@ -10,7 +10,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
       tex = pkgs.texlive.combine {
         inherit (pkgs.texlive) scheme-full latex-bin latexmk
-        fontspec;
+        fontspec fontawesome5;
       };
     in rec {
       packages = {
