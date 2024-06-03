@@ -1,4 +1,4 @@
-\documentclass{resume}
+\documentclass[11pt]{resume}
 \usepackage[sfdefault,condensed]{roboto} % Use the Roboto font as the default sans-serif font
 \renewcommand*\familydefault{\sfdefault} % Set the default font family to sans-serif
 
@@ -49,7 +49,7 @@
 \begin{rSection}{Education}
   {% for edu in education %}
   \begin{rSubsection}{ {{- edu.institution -}} }{ {{- edu.start_date }} - {{ edu.end_date -}} }{ {{- edu.degree -}} }{ {{- edu.location -}} }
-    \grey{\item {{ edu.notes -}} }
+    \grey{\item {{ edu.details -}} }
   \end{rSubsection}
   {% endfor %}
 \end{rSection}
