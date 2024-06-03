@@ -12,6 +12,7 @@
 \usepackage{ifthen}
 \usepackage{tabularx}
 \usepackage{xcolor}
+\usepackage{hyperref}
 
 % refactor skills section
 \RequirePackage{xparse}
@@ -50,10 +51,24 @@
 \newcommand{\name}[1]{\renewcommand{\name}{#1}}
 \newcommand{\email}[1]{\renewcommand{\email}{#1}}
 \newcommand{\linkedin}[1]{\renewcommand{\linkedin}{#1}}
+\newcommand{\github}[1]{\renewcommand{\github}{#1}}
 \newcommand{\phone}[1]{\renewcommand{\phone}{#1}}
 \newcommand{\location}[1]{\renewcommand{\location}{#1}}
 \newcommand{\separator}{\\}
 \newcommand{\skillSeparator}{\cdot}
+
+% Redefine \UrlFont to maintain the documnet font
+% \renewcommand{\UrlFont}{\normalfont}
+
+% Custom command to format URL
+\newcommand{\formaturl}[1]{%
+  \begingroup
+  \def\UrlLeft{}%
+  \def\UrlRight{}%
+  \urlstyle{same}
+  \href{https://#1}{#1}%
+  \endgroup
+}
 
 \newcommand{\lightgrey}[1]{{\color{black!40}#1}}
 \newcommand{\grey}[1]{{\color{black!80}#1}}
@@ -65,12 +80,12 @@
     {\Huge\name} &
     \lightgrey{
       \begin{tabular}[b]{r}
-        \location\separator
-        \phone
+        \formaturl{\github}\separator
+        \formaturl{\linkedin}
       \end{tabular}
       \begin{tabular}[b]{r}
-        \email\separator
-        \linkedin
+        \phone\separator
+        \email
       \end{tabular}
     }
   \end{tabularx}

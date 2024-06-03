@@ -3,8 +3,8 @@ personal_info:
   location: City, Province
   email: john.doe@example.com
   phone: '123.456.7890'
-  linkedin: linkedin.com/in/johndoe
-  github: github.com/johndoe
+  linkedin: 'linkedin.com/in/johndoe'
+  github: 'github.com/johndoe'
   intro: |
     Description of education, achievements, etc.
 
