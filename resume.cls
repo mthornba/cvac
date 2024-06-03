@@ -36,7 +36,6 @@
 \newcommand{\phone}[1]{\renewcommand{\phone}{#1 {\faIcon{phone-square}}}}
 \newcommand{\location}[1]{\renewcommand{\location}{#1 {\faIcon{map-marker-alt}}}}
 \newcommand{\separator}{\\}
-\newcommand{\skillSeparator}{\cdot}
 
 % Redefine \UrlFont to maintain the documnet font
 % \renewcommand{\UrlFont}{\normalfont}
