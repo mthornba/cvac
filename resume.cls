@@ -14,6 +14,7 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{fontawesome5}
+\usepackage{fancyhdr}
 
 %%%
 % Set margins
@@ -36,6 +37,7 @@
 \newcommand{\phone}[1]{\renewcommand{\phone}{#1 {\faIcon{phone-square}}}}
 \newcommand{\location}[1]{\renewcommand{\location}{#1 {\faIcon{map-marker-alt}}}}
 \newcommand{\separator}{\\}
+\newcommand{\footertext}[1]{\renewcommand{\footertext}{\lightgrey{Built on \faIcon{github-square} \formaturl{#1}}}}
 
 % Redefine \UrlFont to maintain the documnet font
 % \renewcommand{\UrlFont}{\normalfont}
@@ -52,6 +54,20 @@
 
 \newcommand{\lightgrey}[1]{{\color{black!40}#1}}
 \newcommand{\grey}[1]{{\color{black!80}#1}}
+
+% Set up the fancyhdr package
+\pagestyle{fancy}
+\fancyhf{} % Clear all header and footer fields
+
+% Customize the footer
+\fancyfoot[L]{%
+  \hrule
+  \vspace{0.5em}
+  \footertext
+}
+
+% Adjust the footer position below the bottom margin
+\setlength{\footskip}{10pt} % Adjust as needed
 
 \newcommand{\printpersonal}{
   \begingroup
