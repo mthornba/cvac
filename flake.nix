@@ -13,12 +13,13 @@
         fontspec fontawesome5;
       };
       srcYaml = "src/resume.yaml";
+      gitCommit = if (self ? shortRev) then self.shortRev else "dirty";
     in rec {
       packages = {
         resume = pkgs.stdenvNoCC.mkDerivation rec {
           name = "cvac";
           src = self;
-          propagatedBuildInputs = [ pkgs.coreutils pkgs.roboto tex pkgs.python3Packages.pyyaml pkgs.python3Packages.jinja2 ];
+          propagatedBuildInputs = [ pkgs.coreutils pkgs.git pkgs.roboto tex pkgs.python3Packages.pyyaml pkgs.python3Packages.jinja2 ];
           phases = ["unpackPhase" "buildPhase" "installPhase"];
           SCRIPT = ''
             #!/usr/bin/env bash
@@ -35,7 +36,7 @@
               SOURCE_DATE_EPOCH=${toString self.lastModified} \
               latexmk -interaction=nonstopmode -pdf -lualatex \
               -output-directory="$DIR" \
-              -pretex="\pdfvariable suppressoptionalinfo 512\relax" \
+              -pretex="\pdfvariable suppressoptionalinfo 512\relax\\def\\githash{${gitCommit}}" \
               -usepretex $BASENAME.tex
             mv "$DIR/$BASENAME.pdf" $RES
             rm -rf "$DIR"

@@ -65,7 +65,16 @@
 \renewcommand{\headrulewidth}{0pt}
 
 % Customize the footer
-\fancyfoot[L]{Built on \faIcon{github-square} \formaturl{github.com/mthornba/cvac}}
+\ifdefined\githash
+\else
+  \def\githash{}
+\fi
+\fancyfoot[L]{%
+\ifthenelse{\equal{\githash}{dirty}}
+{\newcommand{\footerlink}{\formaturl{github.com/mthornba/cvac}}}
+{\newcommand{\footerlink}{\formaturl{github.com/mthornba/cvac/commit/\githash}}}
+  Built from YAML using \footerlink}
+
 \fancyfoot[R]{\thepage\ / \pageref{LastPage}}
 
 \newcommand{\printpersonal}{
