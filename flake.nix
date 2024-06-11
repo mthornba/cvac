@@ -12,7 +12,7 @@
         inherit (pkgs.texlive) scheme-full latex-bin latexmk
         fontspec fontawesome5;
       };
-      srcYaml = "src/resume.yaml";
+      srcYaml = builtins.getEnv "srcYaml";
       gitCommit = if (self ? shortRev) then self.shortRev else "dirty";
     in rec {
       packages = {

@@ -4,14 +4,24 @@
 
 The Nix Flake will build a script which will render the LaTeX template to a PDF.
 
-### Build the script
+### Build the script and `tex` file
 
 ```sh
-nix build
+srcYaml=src/resume.yaml nix build --impure
 ```
 
-### Build the document
+### Render the document to PDF
 
 ```sh
-nix run
+srcYaml=src/resume.yaml nix run --impure
+```
+
+## `git-crypt`
+
+I've included my personal data in `src/matt_thornback-resume.yaml`, encrypted using `git-crypt`. To use this as a source:
+
+```sh
+git-crypt unlock </path/to/crypt.key>
+srcYaml=src/matt_thornback-resume.yaml nix build --impure
+srcYaml=src/matt_thornback-resume.yaml nix run --impure
 ```
