@@ -40,12 +40,12 @@
           '';
           buildPhase = ''
             printenv SCRIPT >latex-resume
-            python3 render.py resume.yaml
+            python3 scripts/render.py src/resume.yaml
           '';
           installPhase = ''
             mkdir -p $out/{bin,share}
-            cp resume.tex $out/share/resume.tex
-            cp resume.cls $out/share/resume.cls
+            mv resume.tex $out/share/resume.tex
+            cp src/resume.cls $out/share/resume.cls
             cp latex-resume $out/bin/latex-resume
             chmod u+x $out/bin/latex-resume
           '';
@@ -55,10 +55,10 @@
         name = "cvac";
         packages = with pkgs; [
           python3
-          roboto
-          texliveFull
           python3Packages.pyyaml
           python3Packages.jinja2
+          roboto
+          texliveFull
         ];
       };
       defaultPackage = packages.resume;

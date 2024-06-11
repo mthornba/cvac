@@ -8,7 +8,7 @@ import os
 # Set up command-line argument parsing
 parser = argparse.ArgumentParser(description='Generate LaTeX document from template and YAML data.')
 parser.add_argument('yaml_file', type=str, help='The YAML file containing the data')
-parser.add_argument('--template', type=str, default='resume.j2', help='The Jinja2 template file (default: resume.j2)')
+parser.add_argument('--template', type=str, default='src/resume.j2', help='The Jinja2 template file (default: resume.j2)')
 
 args = parser.parse_args()
 
