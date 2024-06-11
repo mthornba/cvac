@@ -12,10 +12,11 @@
         inherit (pkgs.texlive) scheme-full latex-bin latexmk
         fontspec fontawesome5;
       };
+      srcYaml = "src/resume.yaml";
     in rec {
       packages = {
         resume = pkgs.stdenvNoCC.mkDerivation rec {
-          name = "latex-resume";
+          name = "cvac";
           src = self;
           propagatedBuildInputs = [ pkgs.coreutils pkgs.roboto tex pkgs.python3Packages.pyyaml pkgs.python3Packages.jinja2 ];
           phases = ["unpackPhase" "buildPhase" "installPhase"];
@@ -24,7 +25,8 @@
             prefix=${builtins.placeholder "out"}
             export PATH="${pkgs.lib.makeBinPath propagatedBuildInputs}";
             DIR=$(mktemp -d)
-            RES=$(pwd)/resume.pdf
+            BASENAME=$(basename -s .yaml ${srcYaml})
+            RES=$(pwd)/$BASENAME.pdf
             cd $prefix/share
             mkdir -p "$DIR/.texcache/texmf-var"
             env TEXMFHOME="$DIR/.cache" \
@@ -34,26 +36,28 @@
               latexmk -interaction=nonstopmode -pdf -lualatex \
               -output-directory="$DIR" \
               -pretex="\pdfvariable suppressoptionalinfo 512\relax" \
-              -usepretex resume.tex
-            mv "$DIR/resume.pdf" $RES
+              -usepretex $BASENAME.tex
+            mv "$DIR/$BASENAME.pdf" $RES
             rm -rf "$DIR"
           '';
           buildPhase = ''
-            printenv SCRIPT >latex-resume
-            python3 scripts/render.py src/resume.yaml
+            printenv SCRIPT >cvac
+            python3 scripts/render.py ${srcYaml}
           '';
           installPhase = ''
             mkdir -p $out/{bin,share}
-            mv resume.tex $out/share/resume.tex
+            BASENAME=$(basename -s .yaml ${srcYaml})
+            mv $BASENAME.tex $out/share/
             cp src/resume.cls $out/share/resume.cls
-            cp latex-resume $out/bin/latex-resume
-            chmod u+x $out/bin/latex-resume
+            cp cvac $out/bin/cvac
+            chmod u+x $out/bin/cvac
           '';
         };
       };
       devShells.default = pkgs.mkShell {
         name = "cvac";
         packages = with pkgs; [
+          git-crypt
           python3
           python3Packages.pyyaml
           python3Packages.jinja2
