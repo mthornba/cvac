@@ -62,6 +62,7 @@
   \lightgrey
 }
 \renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0pt}
 
 % Customize the footer
 \fancyfoot[L]{Built on \faIcon{github-square} \formaturl{github.com/mthornba/cvac}}
