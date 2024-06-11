@@ -15,6 +15,7 @@
 \usepackage{hyperref}
 \usepackage{fontawesome5}
 \usepackage{fancyhdr}
+\usepackage{lastpage} % To get the total number of pages
 
 %%%
 % Set margins
@@ -37,7 +38,9 @@
 \newcommand{\phone}[1]{\renewcommand{\phone}{#1 {\faIcon{phone-square}}}}
 \newcommand{\location}[1]{\renewcommand{\location}{#1 {\faIcon{map-marker-alt}}}}
 \newcommand{\separator}{\\}
-\newcommand{\footertext}[1]{\renewcommand{\footertext}{\lightgrey{Built on \faIcon{github-square} \formaturl{#1}}}}
+
+\newcommand{\lightgrey}{\color{black!30}}
+\newcommand{\grey}{\color{black!70}}
 
 % Redefine \UrlFont to maintain the documnet font
 % \renewcommand{\UrlFont}{\normalfont}
@@ -52,22 +55,17 @@
   \endgroup
 }
 
-\newcommand{\lightgrey}[1]{{\color{black!40}#1}}
-\newcommand{\grey}[1]{{\color{black!80}#1}}
-
 % Set up the fancyhdr package
 \pagestyle{fancy}
 \fancyhf{} % Clear all header and footer fields
+\fancyfootinit{%
+  \lightgrey
+}
+\renewcommand{\footrulewidth}{0.4pt}
 
 % Customize the footer
-\fancyfoot[L]{%
-  \hrule
-  \vspace{0.5em}
-  \footertext
-}
-
-% Adjust the footer position below the bottom margin
-\setlength{\footskip}{10pt} % Adjust as needed
+\fancyfoot[L]{Built on \faIcon{github-square} \formaturl{github.com/mthornba/cvac}}
+\fancyfoot[R]{\thepage\ / \pageref{LastPage}}
 
 \newcommand{\printpersonal}{
   \begingroup
@@ -128,6 +126,7 @@
     \textit{#3} \hfill \textit{#4}
   }
   \smallskip
+  \grey
   \begin{list}{\raisebox{0.4ex}{\tiny$\bullet$}}{\leftmargin=1.3em}
     \setlength{\itemsep}{-0.5em} \vspace{-0.5em}
     }{
