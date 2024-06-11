@@ -5,7 +5,7 @@
     flake-utils.url = github:numtide/flake-utils;
   };
   outputs = { self, nixpkgs, flake-utils }:
-    with flake-utils.lib; eachSystem allSystems (system:
+    with flake-utils.lib; eachSystem [ "x86_64-linux" ] (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
       tex = pkgs.texlive.combine {
@@ -40,6 +40,7 @@
           '';
           buildPhase = ''
             printenv SCRIPT >latex-resume
+            python3 render.py resume.yaml
           '';
           installPhase = ''
             mkdir -p $out/{bin,share}
