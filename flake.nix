@@ -5,26 +5,29 @@
     flake-utils.url = github:numtide/flake-utils;
   };
   outputs = { self, nixpkgs, flake-utils }:
-    with flake-utils.lib; eachSystem allSystems (system:
+    with flake-utils.lib; eachSystem [ "x86_64-linux" ] (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
       tex = pkgs.texlive.combine {
         inherit (pkgs.texlive) scheme-full latex-bin latexmk
         fontspec fontawesome5;
       };
+      srcYaml = "src/resume.yaml";
+      gitCommit = if (self ? shortRev) then self.shortRev else "dirty";
     in rec {
       packages = {
         resume = pkgs.stdenvNoCC.mkDerivation rec {
-          name = "latex-resume";
+          name = "cvac";
           src = self;
-          propagatedBuildInputs = [ pkgs.coreutils pkgs.roboto tex pkgs.python3Packages.pyyaml pkgs.python3Packages.jinja2 ];
+          propagatedBuildInputs = [ pkgs.coreutils pkgs.git pkgs.roboto tex pkgs.python3Packages.pyyaml pkgs.python3Packages.jinja2 ];
           phases = ["unpackPhase" "buildPhase" "installPhase"];
           SCRIPT = ''
             #!/usr/bin/env bash
             prefix=${builtins.placeholder "out"}
             export PATH="${pkgs.lib.makeBinPath propagatedBuildInputs}";
             DIR=$(mktemp -d)
-            RES=$(pwd)/resume.pdf
+            BASENAME=$(basename -s .yaml ${srcYaml})
+            RES=$(pwd)/$BASENAME.pdf
             cd $prefix/share
             mkdir -p "$DIR/.texcache/texmf-var"
             env TEXMFHOME="$DIR/.cache" \
@@ -33,31 +36,34 @@
               SOURCE_DATE_EPOCH=${toString self.lastModified} \
               latexmk -interaction=nonstopmode -pdf -lualatex \
               -output-directory="$DIR" \
-              -pretex="\pdfvariable suppressoptionalinfo 512\relax" \
-              -usepretex resume.tex
-            mv "$DIR/resume.pdf" $RES
+              -pretex="\pdfvariable suppressoptionalinfo 512\relax\\def\\githash{${gitCommit}}" \
+              -usepretex $BASENAME.tex
+            mv "$DIR/$BASENAME.pdf" $RES
             rm -rf "$DIR"
           '';
           buildPhase = ''
-            printenv SCRIPT >latex-resume
+            printenv SCRIPT >cvac
+            python3 scripts/render.py ${srcYaml}
           '';
           installPhase = ''
             mkdir -p $out/{bin,share}
-            cp resume.tex $out/share/resume.tex
-            cp resume.cls $out/share/resume.cls
-            cp latex-resume $out/bin/latex-resume
-            chmod u+x $out/bin/latex-resume
+            BASENAME=$(basename -s .yaml ${srcYaml})
+            mv $BASENAME.tex $out/share/
+            cp src/resume.cls $out/share/resume.cls
+            cp cvac $out/bin/cvac
+            chmod u+x $out/bin/cvac
           '';
         };
       };
       devShells.default = pkgs.mkShell {
         name = "cvac";
         packages = with pkgs; [
+          git-crypt
           python3
-          roboto
-          texliveFull
           python3Packages.pyyaml
           python3Packages.jinja2
+          roboto
+          texliveFull
         ];
       };
       defaultPackage = packages.resume;
