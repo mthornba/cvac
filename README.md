@@ -4,14 +4,14 @@
 
 The Nix Flake will build a script which will render the LaTeX template to a PDF.
 
-### Build the script
+### Build the script and `tex` file
 
 ```sh
-nix build
+nix build --override-input src-data path:../cvac-data/matt_thornback.yaml
 ```
 
-### Build the document
+### Render the document to PDF
 
 ```sh
-nix run
+nix run --override-input src-data path:../cvac-data/matt_thornback.yaml
 ```

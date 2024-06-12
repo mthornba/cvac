@@ -37,7 +37,21 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "src-data": "src-data"
+      }
+    },
+    "src-data": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-+ZJBe5sBYq5mrpzdJWYy3bUy6uq3svEE2hSU+B4kYJg=",
+        "path": "./src/resume.yaml",
+        "type": "path"
+      },
+      "original": {
+        "path": "./src/resume.yaml",
+        "type": "path"
       }
     },
     "systems": {
