@@ -15,7 +15,9 @@
         fontspec fontawesome5;
       };
       srcYaml = src-data.outPath;
-      gitCommit = if (self ? shortRev) then self.shortRev else "dirty";
+      gitCommit = if (self ? shortRev) then self.shortRev
+            else if (self ? dirtyShortRev) then self.dirtyShortRev
+            else "dirty";
     in rec {
       packages = {
         resume = pkgs.stdenvNoCC.mkDerivation rec {
