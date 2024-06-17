@@ -17,7 +17,7 @@
       srcYaml = src-data.outPath;
       gitCommit = if (self ? shortRev) then self.shortRev
             else if (self ? dirtyShortRev) then self.dirtyShortRev
-            else "";
+            else "dirty";
     in rec {
       packages = {
         resume = pkgs.stdenvNoCC.mkDerivation rec {

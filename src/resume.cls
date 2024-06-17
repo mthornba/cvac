@@ -69,8 +69,10 @@
 \else
   \def\githash{}
 \fi
-\newcommand{\footerlink}{\formaturl{github.com/mthornba/cvac}}
 \fancyfoot[L]{%
+\ifthenelse{\equal{\githash}{dirty}}
+{\newcommand{\footerlink}{\formaturl{github.com/mthornba/cvac} commit: \githash}}
+{\newcommand{\footerlink}{\formaturl{github.com/mthornba/cvac/commit/\githash}}}
   Built from YAML using \footerlink}
 
 \fancyfoot[R]{\thepage\ / \pageref{LastPage}}
