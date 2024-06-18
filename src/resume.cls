@@ -65,15 +65,13 @@
 \renewcommand{\headrulewidth}{0pt}
 
 % Customize the footer
-\ifdefined\githash
-\else
-  \def\githash{}
-\fi
+\ifdefined\githash \else \def\githash{} \fi
+\ifdefined\datahash \else \def\datahash{} \fi
+
 \fancyfoot[L]{%
-\ifthenelse{\equal{\githash}{dirty}}
-{\newcommand{\footerlink}{\formaturl{github.com/mthornba/cvac} commit: \githash}}
-{\newcommand{\footerlink}{\formaturl{github.com/mthornba/cvac/commit/\githash}}}
-  Built from YAML using \footerlink}
+  \newcommand{\thisRepo}{\formaturl{github.com/mthornba/cvac/commit/\githash}}
+  Built from YAML using \thisRepo\quad v.\datahash%
+}
 
 \fancyfoot[R]{\thepage\ / \pageref{LastPage}}
 

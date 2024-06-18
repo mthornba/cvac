@@ -18,6 +18,8 @@
       gitCommit = if (self ? shortRev) then self.shortRev
             else if (self ? dirtyShortRev) then self.dirtyShortRev
             else "dirty";
+      dataCommit = if (src-data ? shortRev) then builtins.getAttr "shortRev" src-data
+            else "dirty";
     in rec {
       packages = {
         resume = pkgs.stdenvNoCC.mkDerivation rec {
@@ -40,7 +42,9 @@
               SOURCE_DATE_EPOCH=${toString self.lastModified} \
               latexmk -interaction=nonstopmode -pdf -lualatex \
               -output-directory="$DIR" \
-              -pretex="\pdfvariable suppressoptionalinfo 512\relax\\def\\githash{${gitCommit}}" \
+              -pretex="\pdfvariable suppressoptionalinfo 512\relax" \
+              -pretex="\def\githash{${gitCommit}}" \
+              -pretex="\def\datahash{${dataCommit}}" \
               -usepretex $BASENAME.tex
             mv "$DIR/$BASENAME.pdf" $RES
             rm -rf "$DIR"
